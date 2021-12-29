@@ -1,6 +1,6 @@
 image: maven:3.8.4-openjdk-11
 
-stage:
+stages:
  -tests
  -build
 maven-test:
