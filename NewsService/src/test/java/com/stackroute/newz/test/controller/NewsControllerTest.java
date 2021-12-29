@@ -30,7 +30,9 @@ import com.stackroute.newz.service.NewsService;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -67,11 +69,11 @@ class NewsControllerTest {
         newsSource.setNewsSourceName("CNN");
         newsSource.setNewsSourceDesc("CNN - US");
         newsSource.setNewsSourceCreatedBy("Becky123");
-        newsSource.setNewsSourceCreationDate();
+        newsSource.setNewsSourceCreationDate(LocalDateTime.now());
 
         reminder = new Reminder();
         reminder.setReminderId("5b0509731764e3096984eae6");
-        reminder.setSchedule();
+        reminder.setSchedule(LocalDateTime.now());
 
         List<Reminder> reminderList = new ArrayList<>();
         reminderList.add(reminder);
@@ -81,12 +83,12 @@ class NewsControllerTest {
         news.setTitle("IPLT20 Match - 01");
         news.setAuthor("Becky123");
         news.setDescription("Ipl match 01 - CSK Vs RCB");
-        news.setPublishedAt();
+        news.setPublishedAt(new Date());
         news.setContent("CSK vs RCB match scheduled  for 4 PM");
         news.setUrl("//CSKIndiansVcRCB.html");
         news.setUrlToImage("//CSKIndiansVcRCB.png");
         news.setReminder(reminder);
-        news.setNewssource(newsSource);
+        news.setNewsSource(newsSource);
 
         newsList = new ArrayList<>();
         newsList.add(news);

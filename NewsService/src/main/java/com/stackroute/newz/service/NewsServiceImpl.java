@@ -1,48 +1,65 @@
 package com.stackroute.newz.service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.stackroute.newz.model.News;
+import com.stackroute.newz.model.UserNews;
+import com.stackroute.newz.repository.NewsRepository;
 import com.stackroute.newz.util.exception.NewsNotFoundException;
 
-/*
-* Service classes are used here to implement additional business logic/validation 
-* This class has to be annotated with @Service annotation.
-* @Service - It is a specialization of the component annotation. It doesn't currently 
-* provide any additional behavior over the @Component annotation, but it's a good idea 
-* to use @Service over @Component in service-layer classes because it specifies intent 
-* better. Additionally, tool support and additional behavior might rely on it in the 
-* future.
-* */
-
-
+@Service
+@Transactional
 public class NewsServiceImpl implements NewsService {
 
-	/*
-	 * Autowiring should be implemented for the NewsDao and MongoOperation.
-	 * (Use Constructor-based autowiring) Please note that we should not create any
-	 * object using the new keyword.
-	 */
+	private NewsRepository newsRepository;
 	
+	@Autowired
+	public NewsServiceImpl(NewsRepository newsRepository) {
+		super();
+		this.newsRepository = newsRepository;
+	}
 
-	/*
-	 * This method should be used to save a new news.
-	 */
+	
 	@Override
 	public boolean addNews(News news) {
-		return false;
+		UserNews userNews = new UserNews();
+		userNews.setNewsList(Arrays.asList(news));
+		UserNews userNewsResp = newsRepository.insert(userNews);
+		return null != userNewsResp ? true:false;
 	}
 
 	/* This method should be used to delete an existing news. */
 	
 	public boolean deleteNews(String userId, int newsId) {
-		return false;
+		Optional<UserNews> optional = newsRepository.findById(userId);
+		if (optional.isPresent()) {
+			newsRepository.delete(optional.get());
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/* This method should be used to delete all news for a  specific userId. */
 	
 	public boolean deleteAllNews(String userId) throws NewsNotFoundException {
-		return false;
+		try {
+			Optional<UserNews> optional = newsRepository.findById(userId);
+			if (optional.isPresent()) {
+				newsRepository.delete(optional.get());
+				return true;
+			} else {
+				throw new NewsNotFoundException(userId);
+			}
+		} catch (Exception e) {
+			throw new NewsNotFoundException(userId);
+		}
 	}
 
 	/*
@@ -50,7 +67,27 @@ public class NewsServiceImpl implements NewsService {
 	 */
 
 	public News updateNews(News news, int newsId, String userId) throws NewsNotFoundException {
-		return null;
+		try {
+		Optional<UserNews> optional = newsRepository.findById(userId);
+
+	
+			if (optional.isPresent()) {
+				UserNews userNews = optional.get();
+				news.setContent("sdad");
+				userNews.getNewsList().add(news);
+				UserNews userNewsResponse = newsRepository.save(userNews);
+				if(null != userNewsResponse) {
+					return userNewsResponse.getNewsList().get(0);
+				}else {
+					return news;
+				}
+				
+			}else {
+				throw new NewsNotFoundException(userId); 
+			}
+		} catch (Exception e) {
+			throw new NewsNotFoundException(userId);
+		}
 	}
 
 	/*
@@ -58,7 +95,25 @@ public class NewsServiceImpl implements NewsService {
 	 */
 
 	public News getNewsByNewsId(String userId, int newsId) throws NewsNotFoundException {
-		return null;
+		
+		try {
+		Optional<UserNews> optional = newsRepository.findById(userId);
+		if (optional.isPresent()) {
+			UserNews userNews = optional.get();
+			List<News> newsList = userNews.getNewsList();
+			Optional<News> optionalNews = newsList.stream().filter(news -> news.getNewsId() == newsId).findFirst();
+			if(optionalNews.isPresent()) {
+				return optionalNews.get();
+			}else {
+				throw new NewsNotFoundException(userId);
+			}
+			
+		} else {
+			throw new NewsNotFoundException(userId);
+		}
+		}catch (Exception e) {
+			throw new NewsNotFoundException(userId);
+		}
 	}
 
 	/*
@@ -66,7 +121,13 @@ public class NewsServiceImpl implements NewsService {
 	 */
 
 	public List<News> getAllNewsByUserId(String userId) {
-		return null;
+		
+		Optional<UserNews> optional = newsRepository.findById(userId);
+		if (optional.isPresent()) {
+			return optional.get().getNewsList();
+		} else {
+			return null;
+		}
 	}
 
 }

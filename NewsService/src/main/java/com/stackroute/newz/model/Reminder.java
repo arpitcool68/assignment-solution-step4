@@ -4,29 +4,33 @@ import java.time.LocalDateTime;
 
 public class Reminder {
 
-	/*
-	 * This class should have two fields(reminderId,schedule).
-	 * This class should also contain the getters and setters for the 
-	 * fields along with the parameterized	constructor and toString method.
-	 * The value of newssourceCreationDate should not be accepted from the user but should be
-	 * always initialized with the system date.
-	 */
-	
+	private String reminderId;
+	private LocalDateTime schedule;
+
+	public Reminder(String reminderId, LocalDateTime schedule) {
+		super();
+		this.reminderId = reminderId;
+		this.schedule = schedule;
+	}
+
+	public Reminder() {
+		super();
+	}
+
 	public String getReminderId() {
-		return null;
+		return reminderId;
 	}
 
 	public void setReminderId(String reminderId) {
-
+		this.reminderId = reminderId;
 	}
 
 	public LocalDateTime getSchedule() {
-		return null;
+		return schedule;
 	}
 
-	public void setSchedule() {
-
+	public void setSchedule(LocalDateTime schedule) {
+		this.schedule = schedule;
 	}
-
 
 }

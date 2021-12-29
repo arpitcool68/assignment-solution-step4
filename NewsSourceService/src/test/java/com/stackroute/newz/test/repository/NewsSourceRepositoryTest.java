@@ -12,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.stackroute.newz.model.NewsSource;
 import com.stackroute.newz.repository.NewsSourceRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
@@ -29,7 +30,7 @@ public class NewsSourceRepositoryTest {
     	newsSource.setNewsSourceName("Cricket-Category");
     	newsSource.setNewsSourceDesc("All about Cricket");
     	newsSource.setNewsSourceCreatedBy("Jhon123");
-    	newsSource.setNewsSourceCreationDate();
+    	newsSource.setNewsSourceCreationDate(LocalDateTime.now());
     }
 
     @AfterEach
@@ -88,7 +89,7 @@ public class NewsSourceRepositoryTest {
     	newsSource.setNewsSourceName("Badminton-Category");
     	newsSource.setNewsSourceDesc("All about Badminton");
     	newsSource.setNewsSourceCreatedBy("Jhon123");
-    	newsSource.setNewsSourceCreationDate();
+    	newsSource.setNewsSourceCreationDate(LocalDateTime.now());
 
     	newsSourceRepository.insert(newsSource);
 

@@ -18,6 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -44,7 +45,7 @@ public class NewsSourceServiceImplTest {
         newsSource.setNewsSourceName("Cricket-Category");
         newsSource.setNewsSourceDesc("All about Cricket");
         newsSource.setNewsSourceCreatedBy("Becky123");
-        newsSource.setNewsSourceCreationDate();
+        newsSource.setNewsSourceCreationDate(LocalDateTime.now());
 
         allNewssource = new ArrayList<>();
         allNewssource.add(newsSource);

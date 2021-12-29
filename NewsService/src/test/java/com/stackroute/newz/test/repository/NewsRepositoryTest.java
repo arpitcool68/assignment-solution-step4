@@ -16,7 +16,9 @@ import com.stackroute.newz.model.Reminder;
 import com.stackroute.newz.model.UserNews;
 import com.stackroute.newz.repository.NewsRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -44,29 +46,29 @@ public class NewsRepositoryTest {
     	newsSource.setNewsSourceName("Cricket-Category");
     	newsSource.setNewsSourceDesc("All about IPL");
     	newsSource.setNewsSourceCreatedBy("Becky123");
-    	newsSource.setNewsSourceCreationDate();
+    	newsSource.setNewsSourceCreationDate(LocalDateTime.now());
 
         reminder = new Reminder();
         reminder.setReminderId("5b0509731764e3096984eae6");
-        reminder.setSchedule();
+        reminder.setSchedule(LocalDateTime.now());
 
         news = new News();
         news.setNewsId(1);
         news.setTitle("IPLT20 Match - 01");
         news.setAuthor("Becky123");
         news.setDescription("Ipl match 01 - CSK Vs RCB");
-        news.setPublishedAt();
+        news.setPublishedAt(new Date());
         news.setContent("CSK vs RCB match scheduled for 4 PM");
         news.setUrl("//CSKIndiansVcRCB.html");
         news.setUrlToImage("//CSKIndiansVcRCB.png");
         news.setReminder(reminder);
-        news.setNewssource(newsSource);
+        news.setNewsSource(newsSource);
         
         newsList = new ArrayList<>();
         newsList.add(news);
 
         userNews.setUserId("Becky123");
-        userNews.setNewslist(newsList);
+        userNews.setNewsList(newsList);
     }
 
     @AfterEach
@@ -77,7 +79,7 @@ public class NewsRepositoryTest {
     @Test
     public void AddNewsTest() {
     	newsRepository.insert(userNews);
-        List<News> allNews = newsRepository.findById("Becky123").get().getNewslist();
+        List<News> allNews = newsRepository.findById("Becky123").get().getNewsList();
         assertThat(newsList.get(0).getNewsId(), is(allNews.get(0).getNewsId()));
     }
 
@@ -85,7 +87,7 @@ public class NewsRepositoryTest {
     @Test
     public void deleteNewsTest() {
     	newsRepository.insert(userNews);
-        List<News> allNews = newsRepository.findById("Becky123").get().getNewslist();
+        List<News> allNews = newsRepository.findById("Becky123").get().getNewsList();
         assertThat(newsList.get(0).getNewsId(), is(allNews.get(0).getNewsId()));
         Iterator<News> iterator = allNews.listIterator();
         while (iterator.hasNext()) {
@@ -94,10 +96,10 @@ public class NewsRepositoryTest {
                 iterator.remove();
         }
 
-        userNews.setNewslist(allNews);
+        userNews.setNewsList(allNews);
         newsRepository.save(userNews);
 
-        allNews = newsRepository.findById("Becky123").get().getNewslist();
+        allNews = newsRepository.findById("Becky123").get().getNewsList();
 
         assertThat(true,is(allNews.isEmpty()));
 
@@ -108,7 +110,7 @@ public class NewsRepositoryTest {
     public void updateNewsTest() {
 
     	newsRepository.insert(userNews);
-        List<News> allNews = newsRepository.findById("Becky123").get().getNewslist();
+        List<News> allNews = newsRepository.findById("Becky123").get().getNewsList();
         assertThat(newsList.get(0).getNewsId(), is(allNews.get(0).getNewsId()));
         Iterator<News> iterator = allNews.listIterator();
         while (iterator.hasNext()) {
@@ -116,9 +118,9 @@ public class NewsRepositoryTest {
             if (news.getNewsId() == 1)
                 news.setContent("CSK vs RCB match scheduled  for 4 PM is cancelled");
         }
-        userNews.setNewslist(allNews);
+        userNews.setNewsList(allNews);
         newsRepository.save(userNews);
-        allNews = newsRepository.findById("Becky123").get().getNewslist();
+        allNews = newsRepository.findById("Becky123").get().getNewsList();
         assertThat("CSK vs RCB match scheduled  for 4 PM is cancelled", is(allNews.get(0).getContent()));
     }
 
@@ -126,7 +128,7 @@ public class NewsRepositoryTest {
     public void getAllNewsByUserId() {
 
     	newsRepository.insert(userNews);
-        List<News> allNews = newsRepository.findById("Becky123").get().getNewslist();
+        List<News> allNews = newsRepository.findById("Becky123").get().getNewsList();
         assertThat(allNews.size(),is(1));
     }
 }

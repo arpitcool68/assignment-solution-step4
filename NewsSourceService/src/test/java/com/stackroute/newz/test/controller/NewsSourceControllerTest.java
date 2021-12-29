@@ -27,6 +27,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class NewsSourceControllerTest {
         newsSource.setNewsSourceName("CNN");
         newsSource.setNewsSourceDesc("CNN - US");
         newsSource.setNewsSourceCreatedBy("Becky123");
-        newsSource.setNewsSourceCreationDate();
+        newsSource.setNewsSourceCreationDate(LocalDateTime.now());
 
         allNewssource = new ArrayList<>();
         allNewssource.add(newsSource);

@@ -24,7 +24,9 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -54,23 +56,23 @@ public class NewsServiceImplTest {
         newsSource.setNewsSourceName("Cricket-Category");
         newsSource.setNewsSourceDesc("All about IPL");
         newsSource.setNewsSourceCreatedBy("Becky123");
-        newsSource.setNewsSourceCreationDate();
+        newsSource.setNewsSourceCreationDate(LocalDateTime.now());
         
         reminder = new Reminder();
         reminder.setReminderId("5b0509731764e3096984eae6");
-        reminder.setSchedule();
+        reminder.setSchedule(LocalDateTime.now());
 
         news = new News();
         news.setNewsId(1);
         news.setTitle("IPLT20 Match - 01");
         news.setAuthor("Becky123");
         news.setDescription("Ipl match 01 - CSK Vs RCB");
-        news.setPublishedAt();
+        news.setPublishedAt(new Date());
         news.setContent("CSK vs RCB match scheduled for 4 PM");
         news.setUrl("//CSKVsRCB.html");
         news.setUrlToImage("//CSKVsRCB.png");
         news.setReminder(reminder);
-        news.setNewssource(newsSource);
+        news.setNewsSource(newsSource);
 
         newsList = new ArrayList<>();
         newsList.add(news);
@@ -78,7 +80,7 @@ public class NewsServiceImplTest {
         userNews = new UserNews();
 
         userNews.setUserId("Becky123");
-        userNews.setNewslist(newsList);
+        userNews.setNewsList(newsList);
 
         options = Optional.of(userNews);
         
