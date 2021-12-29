@@ -29,7 +29,7 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	public boolean addNews(News news) {
 		UserNews userNews = new UserNews();
-		userNews.setNewsList(Arrays.asList(news));
+		userNews.setNewslist(Arrays.asList(news));
 		UserNews userNewsResp = newsRepository.insert(userNews);
 		return null != userNewsResp ? true:false;
 	}
@@ -74,10 +74,10 @@ public class NewsServiceImpl implements NewsService {
 			if (optional.isPresent()) {
 				UserNews userNews = optional.get();
 				news.setContent("sdad");
-				userNews.getNewsList().add(news);
+				userNews.getNewslist().add(news);
 				UserNews userNewsResponse = newsRepository.save(userNews);
 				if(null != userNewsResponse) {
-					return userNewsResponse.getNewsList().get(0);
+					return userNewsResponse.getNewslist().get(0);
 				}else {
 					return news;
 				}
@@ -100,7 +100,7 @@ public class NewsServiceImpl implements NewsService {
 		Optional<UserNews> optional = newsRepository.findById(userId);
 		if (optional.isPresent()) {
 			UserNews userNews = optional.get();
-			List<News> newsList = userNews.getNewsList();
+			List<News> newsList = userNews.getNewslist();
 			Optional<News> optionalNews = newsList.stream().filter(news -> news.getNewsId() == newsId).findFirst();
 			if(optionalNews.isPresent()) {
 				return optionalNews.get();
@@ -124,7 +124,7 @@ public class NewsServiceImpl implements NewsService {
 		
 		Optional<UserNews> optional = newsRepository.findById(userId);
 		if (optional.isPresent()) {
-			return optional.get().getNewsList();
+			return optional.get().getNewslist();
 		} else {
 			return null;
 		}

@@ -64,7 +64,7 @@ public class NewsSourceControllerTest {
         newsSource.setNewsSourceName("CNN");
         newsSource.setNewsSourceDesc("CNN - US");
         newsSource.setNewsSourceCreatedBy("Becky123");
-        newsSource.setNewsSourceCreationDate(LocalDateTime.now());
+        newsSource.setNewsSourceCreationDate();
 
         allNewssource = new ArrayList<>();
         allNewssource.add(newsSource);

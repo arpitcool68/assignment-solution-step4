@@ -45,7 +45,7 @@ public class NewsSourceServiceImplTest {
         newsSource.setNewsSourceName("Cricket-Category");
         newsSource.setNewsSourceDesc("All about Cricket");
         newsSource.setNewsSourceCreatedBy("Becky123");
-        newsSource.setNewsSourceCreationDate(LocalDateTime.now());
+        newsSource.setNewsSourceCreationDate();
 
         allNewssource = new ArrayList<>();
         allNewssource.add(newsSource);

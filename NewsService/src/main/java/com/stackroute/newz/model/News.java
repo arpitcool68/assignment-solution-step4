@@ -51,8 +51,8 @@ public class News {
 		return publishedAt;
 	}
 
-	public void setPublishedAt(Date publishedAt) {
-		this.publishedAt = publishedAt;
+	public void setPublishedAt() {
+		this.publishedAt = new Date();
 	}
 
 	public String getContent() {
@@ -91,7 +91,7 @@ public class News {
 		return newsSource;
 	}
 
-	public void setNewsSource(NewsSource newsSource) {
+	public void setNewssource(NewsSource newsSource) {
 		this.newsSource = newsSource;
 	}
 

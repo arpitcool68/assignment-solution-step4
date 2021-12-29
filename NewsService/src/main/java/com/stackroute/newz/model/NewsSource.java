@@ -43,12 +43,11 @@ public class NewsSource {
 	public LocalDateTime getNewsSourceCreationDate() {
 		return newsSourceCreationDate;
 	}
-	public void setNewsSourceCreationDate(LocalDateTime newsSourceCreationDate) {
-		if(null != newsSourceCreationDate) {
-			this.newsSourceCreationDate = newsSourceCreationDate;
-		}else {
-			this.newsSourceCreationDate = LocalDateTime.now();
-		}
+
+	public void setNewsSourceCreationDate() {
+
+		this.newsSourceCreationDate = LocalDateTime.now();
+
 	}
 	
 	public NewsSource(int newsSourceId, String newsSourceName, String newsSourceDesc, String newsSourceCreatedBy,

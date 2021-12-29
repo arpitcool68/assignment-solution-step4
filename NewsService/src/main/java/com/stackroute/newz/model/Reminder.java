@@ -29,8 +29,8 @@ public class Reminder {
 		return schedule;
 	}
 
-	public void setSchedule(LocalDateTime schedule) {
-		this.schedule = schedule;
+	public void setSchedule() {
+		this.schedule = LocalDateTime.now();
 	}
 
 }

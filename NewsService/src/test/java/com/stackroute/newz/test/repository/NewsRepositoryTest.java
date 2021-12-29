@@ -46,29 +46,29 @@ public class NewsRepositoryTest {
     	newsSource.setNewsSourceName("Cricket-Category");
     	newsSource.setNewsSourceDesc("All about IPL");
     	newsSource.setNewsSourceCreatedBy("Becky123");
-    	newsSource.setNewsSourceCreationDate(LocalDateTime.now());
+    	newsSource.setNewsSourceCreationDate();
 
         reminder = new Reminder();
         reminder.setReminderId("5b0509731764e3096984eae6");
-        reminder.setSchedule(LocalDateTime.now());
+        reminder.setSchedule();
 
         news = new News();
         news.setNewsId(1);
         news.setTitle("IPLT20 Match - 01");
         news.setAuthor("Becky123");
         news.setDescription("Ipl match 01 - CSK Vs RCB");
-        news.setPublishedAt(new Date());
+        news.setPublishedAt();
         news.setContent("CSK vs RCB match scheduled for 4 PM");
         news.setUrl("//CSKIndiansVcRCB.html");
         news.setUrlToImage("//CSKIndiansVcRCB.png");
         news.setReminder(reminder);
-        news.setNewsSource(newsSource);
+        news.setNewssource(newsSource);
         
         newsList = new ArrayList<>();
         newsList.add(news);
 
         userNews.setUserId("Becky123");
-        userNews.setNewsList(newsList);
+        userNews.setNewslist(newsList);
     }
 
     @AfterEach
@@ -79,7 +79,7 @@ public class NewsRepositoryTest {
     @Test
     public void AddNewsTest() {
     	newsRepository.insert(userNews);
-        List<News> allNews = newsRepository.findById("Becky123").get().getNewsList();
+        List<News> allNews = newsRepository.findById("Becky123").get().getNewslist();
         assertThat(newsList.get(0).getNewsId(), is(allNews.get(0).getNewsId()));
     }
 
@@ -87,7 +87,7 @@ public class NewsRepositoryTest {
     @Test
     public void deleteNewsTest() {
     	newsRepository.insert(userNews);
-        List<News> allNews = newsRepository.findById("Becky123").get().getNewsList();
+        List<News> allNews = newsRepository.findById("Becky123").get().getNewslist();
         assertThat(newsList.get(0).getNewsId(), is(allNews.get(0).getNewsId()));
         Iterator<News> iterator = allNews.listIterator();
         while (iterator.hasNext()) {
@@ -96,10 +96,10 @@ public class NewsRepositoryTest {
                 iterator.remove();
         }
 
-        userNews.setNewsList(allNews);
+        userNews.setNewslist(allNews);
         newsRepository.save(userNews);
 
-        allNews = newsRepository.findById("Becky123").get().getNewsList();
+        allNews = newsRepository.findById("Becky123").get().getNewslist();
 
         assertThat(true,is(allNews.isEmpty()));
 
@@ -110,7 +110,7 @@ public class NewsRepositoryTest {
     public void updateNewsTest() {
 
     	newsRepository.insert(userNews);
-        List<News> allNews = newsRepository.findById("Becky123").get().getNewsList();
+        List<News> allNews = newsRepository.findById("Becky123").get().getNewslist();
         assertThat(newsList.get(0).getNewsId(), is(allNews.get(0).getNewsId()));
         Iterator<News> iterator = allNews.listIterator();
         while (iterator.hasNext()) {
@@ -118,9 +118,9 @@ public class NewsRepositoryTest {
             if (news.getNewsId() == 1)
                 news.setContent("CSK vs RCB match scheduled  for 4 PM is cancelled");
         }
-        userNews.setNewsList(allNews);
+        userNews.setNewslist(allNews);
         newsRepository.save(userNews);
-        allNews = newsRepository.findById("Becky123").get().getNewsList();
+        allNews = newsRepository.findById("Becky123").get().getNewslist();
         assertThat("CSK vs RCB match scheduled  for 4 PM is cancelled", is(allNews.get(0).getContent()));
     }
 
@@ -128,7 +128,7 @@ public class NewsRepositoryTest {
     public void getAllNewsByUserId() {
 
     	newsRepository.insert(userNews);
-        List<News> allNews = newsRepository.findById("Becky123").get().getNewsList();
+        List<News> allNews = newsRepository.findById("Becky123").get().getNewslist();
         assertThat(allNews.size(),is(1));
     }
 }

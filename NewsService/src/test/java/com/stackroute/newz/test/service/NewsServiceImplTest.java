@@ -56,23 +56,23 @@ public class NewsServiceImplTest {
         newsSource.setNewsSourceName("Cricket-Category");
         newsSource.setNewsSourceDesc("All about IPL");
         newsSource.setNewsSourceCreatedBy("Becky123");
-        newsSource.setNewsSourceCreationDate(LocalDateTime.now());
+        newsSource.setNewsSourceCreationDate();
         
         reminder = new Reminder();
         reminder.setReminderId("5b0509731764e3096984eae6");
-        reminder.setSchedule(LocalDateTime.now());
+        reminder.setSchedule();
 
         news = new News();
         news.setNewsId(1);
         news.setTitle("IPLT20 Match - 01");
         news.setAuthor("Becky123");
         news.setDescription("Ipl match 01 - CSK Vs RCB");
-        news.setPublishedAt(new Date());
+        news.setPublishedAt();
         news.setContent("CSK vs RCB match scheduled for 4 PM");
         news.setUrl("//CSKVsRCB.html");
         news.setUrlToImage("//CSKVsRCB.png");
         news.setReminder(reminder);
-        news.setNewsSource(newsSource);
+        news.setNewssource(newsSource);
 
         newsList = new ArrayList<>();
         newsList.add(news);
@@ -80,7 +80,7 @@ public class NewsServiceImplTest {
         userNews = new UserNews();
 
         userNews.setUserId("Becky123");
-        userNews.setNewsList(newsList);
+        userNews.setNewslist(newsList);
 
         options = Optional.of(userNews);
         

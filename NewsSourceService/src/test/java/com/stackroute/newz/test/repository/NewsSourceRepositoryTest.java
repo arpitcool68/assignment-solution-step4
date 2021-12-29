@@ -30,7 +30,7 @@ public class NewsSourceRepositoryTest {
     	newsSource.setNewsSourceName("Cricket-Category");
     	newsSource.setNewsSourceDesc("All about Cricket");
     	newsSource.setNewsSourceCreatedBy("Jhon123");
-    	newsSource.setNewsSourceCreationDate(LocalDateTime.now());
+    	newsSource.setNewsSourceCreationDate();
     }
 
     @AfterEach
@@ -89,7 +89,7 @@ public class NewsSourceRepositoryTest {
     	newsSource.setNewsSourceName("Badminton-Category");
     	newsSource.setNewsSourceDesc("All about Badminton");
     	newsSource.setNewsSourceCreatedBy("Jhon123");
-    	newsSource.setNewsSourceCreationDate(LocalDateTime.now());
+    	newsSource.setNewsSourceCreationDate();
 
     	newsSourceRepository.insert(newsSource);
 

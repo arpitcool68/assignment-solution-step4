@@ -26,11 +26,11 @@ public class UserNews {
 		this.userId = userId;
 	}
 
-	public List<News> getNewsList() {
+	public List<News> getNewslist() {
 		return newsList;
 	}
 
-	public void setNewsList(List<News> newsList) {
+	public void setNewslist(List<News> newsList) {
 		this.newsList = newsList;
 	}
 
