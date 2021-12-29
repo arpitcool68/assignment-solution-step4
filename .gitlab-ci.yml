@@ -1,0 +1,11 @@
+image: maven:3.8.4-openjdk-11
+
+stage:
+ -tests
+ -build
+maven-test:
+ stage: tests
+ script: "mvn-test"	
+maven-build:
+ stage:build
+ script:"mvn package"
