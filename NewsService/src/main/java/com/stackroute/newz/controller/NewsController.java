@@ -32,11 +32,9 @@ public class NewsController {
 		this.newsService = newsService;
 	}
 
-	@ApiOperation(value = "View a list of available products", response = News.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200 , message = "Successfully retrieved News"),
-			@ApiResponse(code = 409 , message = "News conflicts with any existing user")
-	})
+	@ApiOperation(value = "News Saved successfully", response = News.class)
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved News"),
+			@ApiResponse(code = 409, message = "News conflicts with any existing user") })
 	@PostMapping
 	public ResponseEntity<News> add(@RequestBody News news) {
 		try {
@@ -108,7 +106,7 @@ public class NewsController {
 	}
 
 	@GetMapping("/{userId}")
-	public ResponseEntity<?> getAllNewsByUserId(@PathVariable String userId) {
+	public ResponseEntity<List<News>> getAllNewsByUserId(@PathVariable String userId) {
 		try {
 			List<News> newsResp = newsService.getAllNewsByUserId(userId);
 			if (null != newsResp) {

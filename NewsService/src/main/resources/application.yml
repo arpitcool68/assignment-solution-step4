@@ -1,9 +1,11 @@
 spring:
  data:
    mongodb:
-     database: news
-     port: 27017
-     host: localhost
+     username: ${MONGO_USER}
+     password: ${MONGO_PASSWORD}
+     database: ${MONGO_DATABASE}
+     port: ${MONGO_PORT}
+     host: ${MONGO_HOST}
 server:
  port: 8081
  servlet:
@@ -13,4 +15,14 @@ logging:
   level:
     org:
       mongodb:
+
+#spring:
+# data:
+#   mongodb:
+#     database: news
+#     port: 27017
+#     host: localhost
+#server:
+# port: 8081
+ 
         driver: ERROR
